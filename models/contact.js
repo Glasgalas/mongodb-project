@@ -22,7 +22,7 @@ const contactSchema = Schema(
     },
     status: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
   { versionKey: false, timestamps: true }
