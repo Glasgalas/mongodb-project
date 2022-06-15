@@ -5,15 +5,15 @@ import models from "../../models/index.js";
 
 export const router = express.Router();
 
-const { ctrlWrapper, validation } = mdlwr;
+const { ctrlWrapper, validation, auth } = mdlwr;
 const { contacts } = ctrl;
 const { getAll, getById, add, deleteById, updateById, updateStatus } = contacts;
 const { contactModel } = models;
 const { joiSchema, statusJoiSchema } = contactModel;
 
-router.get("/", ctrlWrapper(getAll));
+router.get("/", auth, ctrlWrapper(getAll));
 router.get("/:id", ctrlWrapper(getById));
-router.post("/", validation(joiSchema), ctrlWrapper(add));
+router.post("/", auth, validation(joiSchema), ctrlWrapper(add));
 router.delete("/:id", ctrlWrapper(deleteById));
 router.put("/:id", validation(joiSchema), ctrlWrapper(updateById));
 router.patch(
